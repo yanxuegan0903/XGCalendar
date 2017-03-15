@@ -163,26 +163,45 @@ typedef enum : NSUInteger {
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    
     CalendarCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([CalendarCell class]) forIndexPath:indexPath];
     
     if (self.totalDay > 0) {
         
         if (indexPath.row >= self.firstWeekday && indexPath.row <(self.totalDay + self.firstWeekday)) {
-            cell.label.text = [NSString stringWithFormat:@"%ld",indexPath.row-self.firstWeekday+1];
+            cell.label.text = [NSString stringWithFormat:@"%d",indexPath.row-self.firstWeekday+1];
             cell.date = [Calendar dateWithYear:self.yearButton.titleLabel.text.integerValue month:self.monthButton.titleLabel.text.integerValue day:cell.label.text.integerValue];
-            if (cell.date == self.dayFirstDate) {
+            
+            
+            if ([cell.date timeIntervalSince1970] == [self.dayFirstDate timeIntervalSince1970]) {
+                NSLog(@"self.dayFirstDate = %@ cell.date = %@",self.dayFirstDate,cell.date);
+
                 cell.label.backgroundColor = [UIColor grayColor];
+            }else{
+                cell.label.backgroundColor = [UIColor redColor];
             }
         }else{
             cell.label.text = @"";
+            cell.date = nil;
+            cell.label.backgroundColor = [UIColor redColor];
         }
     }else{
         cell.label.text = @"";
+        cell.date = nil;
+        cell.label.backgroundColor = [UIColor redColor];
     }
     
     return cell;
     
 }
+
+
+#pragma mark - CollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    CalendarCell * cell = (CalendarCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    self.date = cell.date;
+}
+
 
 #pragma mark - 左右箭头点击时间
 
