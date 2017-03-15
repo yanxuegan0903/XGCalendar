@@ -20,4 +20,7 @@
 //  输入年月日 获取date
 + (NSDate *)dateWithYear:(NSUInteger)year month:(NSUInteger)month day:(NSUInteger)day;
 
+//  获取这个日期的前后几天的时间
++ (NSDate *)dateWithDate:(NSDate *)date DayAfter:(NSInteger)day;
+
 @end

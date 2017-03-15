@@ -39,6 +39,16 @@
     return [calendar dateFromComponents:comp];
 }
 
+//  获取这个日期的前后几天的时间
++ (NSDate *)dateWithDate:(NSDate *)date DayAfter:(NSInteger)day{
+    NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents * comp = [[NSDateComponents alloc] init];
+    [comp setDay:day];
+    
+    return [calendar dateByAddingComponents:comp toDate:date options:0];
+}
+
+
 
 
 @end

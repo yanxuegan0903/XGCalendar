@@ -36,6 +36,8 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, strong) UIButton *monthButton;
 
+@property (nonatomic, strong) NSDate *dayFirstDate;     //  一天最开始的时间戳
+
 @end
 
 
@@ -141,6 +143,9 @@ typedef enum : NSUInteger {
     [formatter setDateFormat:@"MM"];
     [self.monthButton setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
     
+    [formatter setDateFormat:@"yyyyMMdd"];
+    self.dayFirstDate = [formatter dateFromString:[formatter stringFromDate:date]];
+    
     [self.collectionView reloadData];
     
 }
@@ -164,6 +169,10 @@ typedef enum : NSUInteger {
         
         if (indexPath.row >= self.firstWeekday && indexPath.row <(self.totalDay + self.firstWeekday)) {
             cell.label.text = [NSString stringWithFormat:@"%ld",indexPath.row-self.firstWeekday+1];
+            cell.date = [Calendar dateWithYear:self.yearButton.titleLabel.text.integerValue month:self.monthButton.titleLabel.text.integerValue day:cell.label.text.integerValue];
+            if (cell.date == self.dayFirstDate) {
+                cell.label.backgroundColor = [UIColor grayColor];
+            }
         }else{
             cell.label.text = @"";
         }
