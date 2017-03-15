@@ -11,7 +11,7 @@
 #import "CalendarCell.h"
 
 
-#define cellHeight floor(frame.size.width/7.0)
+#define cellHeight frame.size.width/7.0
 
 
 typedef enum : NSUInteger {
@@ -106,7 +106,7 @@ typedef enum : NSUInteger {
         layout.minimumInteritemSpacing = 0;
         layout.minimumLineSpacing = 0;
         
-        UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, frame.size.width - cellHeight*5, frame.size.width, cellHeight*5) collectionViewLayout:layout];
+        UICollectionView * collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, frame.size.height - cellHeight*6, frame.size.width, cellHeight*6) collectionViewLayout:layout];
         [self addSubview:collectionView];
         [collectionView registerClass:[CalendarCell class] forCellWithReuseIdentifier:NSStringFromClass([CalendarCell class])];
         collectionView.backgroundColor = [UIColor greenColor];
@@ -153,7 +153,7 @@ typedef enum : NSUInteger {
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 35;
+    return 42;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -181,14 +181,8 @@ typedef enum : NSUInteger {
     
     NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents * comp = [[NSDateComponents alloc] init];
-    if (sender.tag == ArrowTagRight) {
-        [comp setMonth:1];
-    }else{
-        [comp setMonth:-1];
-    }
-    
+    [comp setMonth:sender.tag == ArrowTagRight ? 1 : -1 ];
     self.date = [calendar dateByAddingComponents:comp toDate:self.date options:0];
-    
     
 }
 

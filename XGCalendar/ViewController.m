@@ -32,10 +32,10 @@
 //    
     
     
-    CalendarView * calendarView = [[CalendarView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.width)];
+    CalendarView * calendarView = [[CalendarView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.width+(self.view.frame.size.width/7.0))];
     [self.view addSubview:calendarView];
     
-    calendarView.date = [Calendar dateWithYear:1969 month:1 day:1];
+    calendarView.date = [Calendar dateWithYear:6969 month:1 day:1];
     
     
     
