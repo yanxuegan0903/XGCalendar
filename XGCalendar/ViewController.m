@@ -31,12 +31,11 @@
 //    NSLog(@"date = %@",[NSDate date]);
 //    
     
-    NSLog(@"self.view.frame.size.width = %f",self.view.frame.size.width);
     
     CalendarView * calendarView = [[CalendarView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.width)];
     [self.view addSubview:calendarView];
     
-    
+    calendarView.date = [Calendar dateWithYear:1969 month:1 day:1];
     
     
     

@@ -14,6 +14,13 @@
 #define cellHeight floor(frame.size.width/7.0)
 
 
+typedef enum : NSUInteger {
+    ArrowTagLeft = 0,
+    ArrowTagRight,
+} ArrowTag;
+
+
+
 @interface CalendarView ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 
@@ -23,6 +30,11 @@
 
 @property(nonatomic,assign)NSInteger totalDay;
 
+@property (nonatomic, strong) NSArray *weekArray;
+
+@property (nonatomic, strong) UIButton *yearButton;
+
+@property (nonatomic, strong) UIButton *monthButton;
 
 @end
 
@@ -39,8 +51,55 @@
         
         self.backgroundColor = [UIColor purpleColor];
         
-        NSLog(@"view frame = %@",NSStringFromCGRect(frame));
-        NSLog(@"cellHeight = %f",cellHeight);
+        
+        //  左边箭头
+        UIButton * leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, cellHeight, cellHeight)];
+        [self addSubview:leftButton];
+        [leftButton setImage:[UIImage imageNamed:@"arrow"] forState:UIControlStateNormal];
+        leftButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        leftButton.contentEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 5);
+        leftButton.tag = ArrowTagLeft;
+        [leftButton addTarget:self action:@selector(clickArrow:) forControlEvents:UIControlEventTouchUpInside];
+
+        
+        //  右边箭头
+        UIButton * rightButton = [[UIButton alloc] initWithFrame:CGRectMake(cellHeight*6, 0, cellHeight, cellHeight)];
+        [self addSubview:rightButton];
+        [rightButton setImage:[UIImage imageNamed:@"arrow"] forState:UIControlStateNormal];
+        rightButton.imageView.transform = CGAffineTransformMakeRotation(M_PI);
+        rightButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        rightButton.contentEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 5);
+        rightButton.tag = ArrowTagRight;
+        [rightButton addTarget:self action:@selector(clickArrow:) forControlEvents:UIControlEventTouchUpInside];
+
+        
+        //  年的按钮
+        UIButton * yearButton = [[UIButton alloc] initWithFrame:CGRectMake(cellHeight* 1.5, 0, cellHeight*2.0, cellHeight)];
+        [self addSubview:yearButton];
+        [yearButton setBackgroundColor:[UIColor clearColor]];
+        yearButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.yearButton = yearButton;
+        
+        
+        //  月的按钮
+        UIButton * monthButton = [[UIButton alloc] initWithFrame:CGRectMake(cellHeight* 3.5, 0, cellHeight*2.0, cellHeight)];
+        [self addSubview:monthButton];
+        [monthButton setBackgroundColor:[UIColor clearColor]];
+        monthButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.monthButton = monthButton;
+        
+        
+        //  用来显示星期几的label
+        for (int i = 0; i<7; i++) {
+            UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(cellHeight * i, cellHeight, cellHeight, cellHeight)];
+            [self addSubview:label];
+            label.text = [self.weekArray objectAtIndex:i];
+            label.textAlignment = NSTextAlignmentCenter;
+            
+        }
+        
+        
+        //  用来显示日期的 collectionView
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         layout.itemSize = CGSizeMake(cellHeight , cellHeight);
@@ -56,16 +115,19 @@
         self.collectionView = collectionView;
         
         
-        
-        
-        
-        
-        
-        
     }
     return self;
 }
 
+- (NSArray *)weekArray{
+    if (!_weekArray) {
+        _weekArray = [NSArray arrayWithObjects:@"日",@"一",@"二",@"三",@"四",@"五",@"六", nil];
+    }
+    return _weekArray;
+}
+
+
+#pragma mark - 设置时间戳  获取并展示时间信息
 
 - (void)setDate:(NSDate *)date{
     _date = date;
@@ -73,8 +135,13 @@
     self.firstWeekday = [Calendar firstWeekdayInThisMonth:date];
     self.totalDay = [Calendar totaldaysInThisMonth:date];
     
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy"];
+    [self.yearButton setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
+    [formatter setDateFormat:@"MM"];
+    [self.monthButton setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
     
-    
+    [self.collectionView reloadData];
     
 }
 
@@ -89,16 +156,41 @@
     return 35;
 }
 
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     CalendarCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([CalendarCell class]) forIndexPath:indexPath];
-    cell.label.text = @"1";
+    
+    if (self.totalDay > 0) {
+        
+        if (indexPath.row >= self.firstWeekday && indexPath.row <(self.totalDay + self.firstWeekday)) {
+            cell.label.text = [NSString stringWithFormat:@"%ld",indexPath.row-self.firstWeekday+1];
+        }else{
+            cell.label.text = @"";
+        }
+    }else{
+        cell.label.text = @"";
+    }
+    
     return cell;
     
 }
 
+#pragma mark - 左右箭头点击时间
 
+- (void)clickArrow:(UIButton *)sender{
+    
+    NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents * comp = [[NSDateComponents alloc] init];
+    if (sender.tag == ArrowTagRight) {
+        [comp setMonth:1];
+    }else{
+        [comp setMonth:-1];
+    }
+    
+    self.date = [calendar dateByAddingComponents:comp toDate:self.date options:0];
+    
+    
+}
 
 
 @end
