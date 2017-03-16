@@ -12,7 +12,7 @@
 #import "JournalShowViewController.h"
 #import "FMProduct.h"
 #import "JournalInfo.h"
-
+#import "Calendar.h"
 
 @interface ViewController ()<UICollectionViewDelegate>
 
@@ -25,18 +25,12 @@
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
     FMProduct * fmP = [[FMProduct alloc] init];
-    [fmP createtable];
-//    [fmP insertIntoTable:123456 title:@"wo3" content:@"sfsdf"];
-    NSString * str = @"woshishui我是谁123";
-//    [fmP insertIntoTableWithDateStamp:[[NSDate date] timeIntervalSince1970] title:str content:str];
     NSMutableArray * arr = [fmP quaryAllData];
-    
-    for (JournalInfo * journal in arr) {
-        NSLog(@"jour = %@",journal);
+    for (JournalInfo * jour in arr) {
+        NSLog(@"%@",jour);
     }
-    
-    
 }
 
 
@@ -50,7 +44,8 @@
     calendarView.date = [NSDate date];
     self.calendarView = calendarView;
     
-    
+    FMProduct * fmP = [[FMProduct alloc] init];
+    [fmP clearAll];
     
     
     
