@@ -7,9 +7,9 @@
 //
 
 #import "JournalShowViewController.h"
-
+#import "JournalAddViewController.h"
 #import "JournalTableViewCell.h"
-
+#import "FMProduct.h"
 
 @interface JournalShowViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -20,6 +20,22 @@
 @end
 
 @implementation JournalShowViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self quaryData];
+}
+
+- (void)quaryData{
+    
+    FMProduct * fmp = [[FMProduct alloc] init];
+    
+    
+    self.dataSource = [fmp quaryWith:[self.date timeIntervalSince1970]];
+    
+    [self.tableView reloadData];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -67,13 +83,36 @@
     
     JournalTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JournalTableViewCell class]) forIndexPath:indexPath];
     
-//    cell.journalInfo = [self.dataSource objectAtIndex:indexPath.row];
+    cell.journalInfo = [self.dataSource objectAtIndex:indexPath.row];
     
     return cell;
     
 }
 
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    JournalTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    FMProduct * fmp = [[FMProduct alloc] init];
+    [fmp deleteWith:cell.journalInfo];
+    [self quaryData];
+}
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+
+
+
+#pragma mark - 点击添加
+- (void)addJournal{
+    NSLog(@"点击添加");
+    
+    JournalAddViewController * vc = [JournalAddViewController new];
+    vc.date = self.date;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

@@ -49,15 +49,18 @@
 
 
 
-//
-//- (void)setJournalInfo:(JournalInfo *)journalInfo{
-//    _journalInfo = journalInfo;
-//    
-//    [self.timeStampLabel setText:[NSString stringWithFormat:@"%ld",(long)journalInfo.dateStamp]];
-//    [self.titleLabel setText:journalInfo.title];
-//    
-//    
-//}
+
+- (void)setJournalInfo:(JournalInfo *)journalInfo{
+    _journalInfo = journalInfo;
+    
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
+    
+    [self.timeStampLabel setText:[NSString stringWithFormat:@"%@",[formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:journalInfo.dateStamp]]]];
+    [self.titleLabel setText:journalInfo.title];
+    
+    
+}
 
 
 

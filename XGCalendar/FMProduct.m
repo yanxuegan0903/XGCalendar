@@ -56,7 +56,11 @@
 - (void)insertIntoTableWithDateStamp:(NSInteger)dateStamp title:(NSString *)title content:(NSString *)content {
     FMManager *dbM = [FMManager shareInsyance];
     if ([dbM.db open]) {
-        [dbM.db executeUpdate:@"insert into journal (datestamp,title,content) values (?,?,?)",@(dateStamp),[title dataUsingEncoding:NSUTF8StringEncoding],[content dataUsingEncoding:NSUTF8StringEncoding]];
+        if ([dbM.db executeUpdate:@"insert into journal (datestamp,title,content) values (?,?,?)",@(dateStamp),[title dataUsingEncoding:NSUTF8StringEncoding],[content dataUsingEncoding:NSUTF8StringEncoding]]) {
+            NSLog(@"--------->>>> 插入成功");
+        }else{
+            NSLog(@"--------->>>> 插入失败");
+        }
     }
     [dbM.db close];
 }
