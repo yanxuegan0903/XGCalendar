@@ -172,7 +172,6 @@ typedef enum : NSUInteger {
             
             
             if ([cell.date timeIntervalSince1970] == [self.dayFirstDate timeIntervalSince1970]) {
-                NSLog(@"self.dayFirstDate = %@ cell.date = %@",self.dayFirstDate,cell.date);
 
                 cell.label.backgroundColor = [UIColor grayColor];
             }else{

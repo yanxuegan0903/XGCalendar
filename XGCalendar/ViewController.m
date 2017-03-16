@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "CalendarView.h"
 #import "CalendarCell.h"
+#import "JournalShowViewController.h"
+#import "FMProduct.h"
 
 @interface ViewController ()<UICollectionViewDelegate>
 
@@ -18,6 +20,18 @@
 @end
 
 @implementation ViewController
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    FMProduct * fmP = [[FMProduct alloc] init];
+    [fmP createtable];
+//    [fmP insertIntoTable:123456 title:@"wo3" content:@"sfsdf"];
+    NSString * str = @"woshishui我是谁123";
+    [fmP insertIntoTable:[str dataUsingEncoding:NSUTF8StringEncoding]];
+
+    NSLog(@"123");
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,10 +53,12 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     CalendarCell * cell = (CalendarCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if (cell.date) {
-        NSLog(@"=======");
         self.calendarView.date = cell.date;
+        JournalShowViewController * vc = [JournalShowViewController new];
+        vc.date = cell.date;
+        [self.navigationController pushViewController:vc animated:YES];
     }
-
+    
 }
 
 

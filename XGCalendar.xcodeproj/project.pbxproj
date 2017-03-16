@@ -15,6 +15,9 @@
 		A7020D031E7A275200D7BB2A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7020CFD1E7A275200D7BB2A /* Info.plist */; };
 		A7020D061E7A277E00D7BB2A /* JournalShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7020D051E7A277E00D7BB2A /* JournalShowViewController.m */; };
 		A7020D091E7A283200D7BB2A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A7020D081E7A283200D7BB2A /* libsqlite3.0.tbd */; };
+		A7020D0C1E7A29C500D7BB2A /* JournalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7020D0B1E7A29C500D7BB2A /* JournalTableViewCell.m */; };
+		A7020D101E7A2A4F00D7BB2A /* FMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7020D0F1E7A2A4F00D7BB2A /* FMManager.m */; };
+		A7020D131E7A2BB000D7BB2A /* FMProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = A7020D121E7A2BB000D7BB2A /* FMProduct.m */; };
 		A7EC96F71E77E50B009C67B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EC96F61E77E50B009C67B1 /* main.m */; };
 		A7EC96FA1E77E50B009C67B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EC96F91E77E50B009C67B1 /* AppDelegate.m */; };
 		A7EC96FD1E77E50C009C67B1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EC96FC1E77E50C009C67B1 /* ViewController.m */; };
@@ -61,6 +64,12 @@
 		A7020D041E7A277E00D7BB2A /* JournalShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournalShowViewController.h; sourceTree = "<group>"; };
 		A7020D051E7A277E00D7BB2A /* JournalShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournalShowViewController.m; sourceTree = "<group>"; };
 		A7020D081E7A283200D7BB2A /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		A7020D0A1E7A29C500D7BB2A /* JournalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournalTableViewCell.h; sourceTree = "<group>"; };
+		A7020D0B1E7A29C500D7BB2A /* JournalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournalTableViewCell.m; sourceTree = "<group>"; };
+		A7020D0E1E7A2A4F00D7BB2A /* FMManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMManager.h; sourceTree = "<group>"; };
+		A7020D0F1E7A2A4F00D7BB2A /* FMManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMManager.m; sourceTree = "<group>"; };
+		A7020D111E7A2BB000D7BB2A /* FMProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMProduct.h; sourceTree = "<group>"; };
+		A7020D121E7A2BB000D7BB2A /* FMProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMProduct.m; sourceTree = "<group>"; };
 		A7EC96F21E77E50B009C67B1 /* XGCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XGCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7EC96F61E77E50B009C67B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A7EC96F81E77E50B009C67B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -138,6 +147,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A7020D0D1E7A2A3600D7BB2A /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				A7020D0E1E7A2A4F00D7BB2A /* FMManager.h */,
+				A7020D0F1E7A2A4F00D7BB2A /* FMManager.m */,
+				A7020D111E7A2BB000D7BB2A /* FMProduct.h */,
+				A7020D121E7A2BB000D7BB2A /* FMProduct.m */,
+			);
+			name = FMDB;
+			sourceTree = "<group>";
+		};
 		A7EC96E91E77E50A009C67B1 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +182,7 @@
 		A7EC96F41E77E50B009C67B1 /* XGCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				A7020D0D1E7A2A3600D7BB2A /* FMDB */,
 				A7020CF11E7A275200D7BB2A /* fmdb */,
 				A7EC97281E77E5F8009C67B1 /* Calendar */,
 				A7EC96F81E77E50B009C67B1 /* AppDelegate.h */,
@@ -170,6 +191,8 @@
 				A7EC96FC1E77E50C009C67B1 /* ViewController.m */,
 				A7020D041E7A277E00D7BB2A /* JournalShowViewController.h */,
 				A7020D051E7A277E00D7BB2A /* JournalShowViewController.m */,
+				A7020D0A1E7A29C500D7BB2A /* JournalTableViewCell.h */,
+				A7020D0B1E7A29C500D7BB2A /* JournalTableViewCell.m */,
 				A7EC96FE1E77E50C009C67B1 /* Main.storyboard */,
 				A7EC97011E77E50D009C67B1 /* Assets.xcassets */,
 				A7EC97031E77E50D009C67B1 /* LaunchScreen.storyboard */,
@@ -355,15 +378,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7020D0C1E7A29C500D7BB2A /* JournalTableViewCell.m in Sources */,
 				A7EC96FD1E77E50C009C67B1 /* ViewController.m in Sources */,
 				A7EC96FA1E77E50B009C67B1 /* AppDelegate.m in Sources */,
 				A7EC96F71E77E50B009C67B1 /* main.m in Sources */,
 				A7020CFE1E7A275200D7BB2A /* FMDatabase.m in Sources */,
 				A7020D001E7A275200D7BB2A /* FMDatabasePool.m in Sources */,
 				A7020D061E7A277E00D7BB2A /* JournalShowViewController.m in Sources */,
+				A7020D131E7A2BB000D7BB2A /* FMProduct.m in Sources */,
 				A7020D011E7A275200D7BB2A /* FMDatabaseQueue.m in Sources */,
 				A7F095AE1E78D4FF007EDE78 /* CalendarCell.m in Sources */,
 				A7EC972B1E77E620009C67B1 /* Calendar.m in Sources */,
+				A7020D101E7A2A4F00D7BB2A /* FMManager.m in Sources */,
 				A7020D021E7A275200D7BB2A /* FMResultSet.m in Sources */,
 				A7F095AB1E78D4AD007EDE78 /* CalendarView.m in Sources */,
 				A7020CFF1E7A275200D7BB2A /* FMDatabaseAdditions.m in Sources */,

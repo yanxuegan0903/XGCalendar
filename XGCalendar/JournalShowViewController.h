@@ -10,4 +10,6 @@
 
 @interface JournalShowViewController : UIViewController
 
+@property (nonatomic, strong) NSDate *date;
+
 @end
