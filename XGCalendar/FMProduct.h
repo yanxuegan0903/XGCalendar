@@ -13,4 +13,5 @@
 
 - (void)insertIntoTableWithDateStamp:(NSInteger)dateStamp title:(NSString *)title content:(NSString *)content ;
 
+- (NSMutableArray *)quaryAllData;
 @end

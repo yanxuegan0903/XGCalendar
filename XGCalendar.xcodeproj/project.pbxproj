@@ -18,6 +18,7 @@
 		A7020D0C1E7A29C500D7BB2A /* JournalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7020D0B1E7A29C500D7BB2A /* JournalTableViewCell.m */; };
 		A7020D101E7A2A4F00D7BB2A /* FMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7020D0F1E7A2A4F00D7BB2A /* FMManager.m */; };
 		A7020D131E7A2BB000D7BB2A /* FMProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = A7020D121E7A2BB000D7BB2A /* FMProduct.m */; };
+		A7020D161E7A3E9300D7BB2A /* JournalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A7020D151E7A3E9300D7BB2A /* JournalInfo.m */; };
 		A7EC96F71E77E50B009C67B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EC96F61E77E50B009C67B1 /* main.m */; };
 		A7EC96FA1E77E50B009C67B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EC96F91E77E50B009C67B1 /* AppDelegate.m */; };
 		A7EC96FD1E77E50C009C67B1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EC96FC1E77E50C009C67B1 /* ViewController.m */; };
@@ -70,6 +71,8 @@
 		A7020D0F1E7A2A4F00D7BB2A /* FMManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMManager.m; sourceTree = "<group>"; };
 		A7020D111E7A2BB000D7BB2A /* FMProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMProduct.h; sourceTree = "<group>"; };
 		A7020D121E7A2BB000D7BB2A /* FMProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMProduct.m; sourceTree = "<group>"; };
+		A7020D141E7A3E9300D7BB2A /* JournalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournalInfo.h; sourceTree = "<group>"; };
+		A7020D151E7A3E9300D7BB2A /* JournalInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournalInfo.m; sourceTree = "<group>"; };
 		A7EC96F21E77E50B009C67B1 /* XGCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XGCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7EC96F61E77E50B009C67B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A7EC96F81E77E50B009C67B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -193,6 +196,8 @@
 				A7020D051E7A277E00D7BB2A /* JournalShowViewController.m */,
 				A7020D0A1E7A29C500D7BB2A /* JournalTableViewCell.h */,
 				A7020D0B1E7A29C500D7BB2A /* JournalTableViewCell.m */,
+				A7020D141E7A3E9300D7BB2A /* JournalInfo.h */,
+				A7020D151E7A3E9300D7BB2A /* JournalInfo.m */,
 				A7EC96FE1E77E50C009C67B1 /* Main.storyboard */,
 				A7EC97011E77E50D009C67B1 /* Assets.xcassets */,
 				A7EC97031E77E50D009C67B1 /* LaunchScreen.storyboard */,
@@ -393,6 +398,7 @@
 				A7020D021E7A275200D7BB2A /* FMResultSet.m in Sources */,
 				A7F095AB1E78D4AD007EDE78 /* CalendarView.m in Sources */,
 				A7020CFF1E7A275200D7BB2A /* FMDatabaseAdditions.m in Sources */,
+				A7020D161E7A3E9300D7BB2A /* JournalInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

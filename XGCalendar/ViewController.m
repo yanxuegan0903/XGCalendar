@@ -11,6 +11,8 @@
 #import "CalendarCell.h"
 #import "JournalShowViewController.h"
 #import "FMProduct.h"
+#import "JournalInfo.h"
+
 
 @interface ViewController ()<UICollectionViewDelegate>
 
@@ -27,9 +29,14 @@
     [fmP createtable];
 //    [fmP insertIntoTable:123456 title:@"wo3" content:@"sfsdf"];
     NSString * str = @"woshishui我是谁123";
-    [fmP insertIntoTableWithDateStamp:[[NSDate date] timeIntervalSince1970] title:str content:str];
-
-    NSLog(@"123");
+//    [fmP insertIntoTableWithDateStamp:[[NSDate date] timeIntervalSince1970] title:str content:str];
+    NSMutableArray * arr = [fmP quaryAllData];
+    
+    for (JournalInfo * journal in arr) {
+        NSLog(@"jour = %@",journal);
+    }
+    
+    
 }
 
 
