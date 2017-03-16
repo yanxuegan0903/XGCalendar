@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JournalInfo.h"
 
 @interface FMProduct : NSObject
 
@@ -24,6 +25,8 @@
 //  清除所有数据
 - (void)clearAll;
 
+//  删除一条数据
+- (void)deleteWith:(JournalInfo*)journal;
 
 
 

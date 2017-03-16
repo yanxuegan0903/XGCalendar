@@ -8,7 +8,6 @@
 
 #import "FMProduct.h"
 #import "FMManager.h"
-#import "JournalInfo.h"
 
 @implementation FMProduct
 
@@ -127,5 +126,14 @@
 //        NSLog(@"删除一条数据失败");
 //    }
 //}
+
+
+- (void)deleteWith:(JournalInfo*)journal{
+    FMManager *dbM = [FMManager shareInsyance];
+    if ([dbM.db open]) {
+        [dbM.db executeUpdate:@"DELETE FROM Journal WHERE id = ?",@(journal.ID)];
+    }
+    [dbM.db close];
+}
 
 @end

@@ -10,9 +10,6 @@
 #import "CalendarView.h"
 #import "CalendarCell.h"
 #import "JournalShowViewController.h"
-#import "FMProduct.h"
-#import "JournalInfo.h"
-#import "Calendar.h"
 
 @interface ViewController ()<UICollectionViewDelegate>
 
@@ -24,15 +21,6 @@
 @implementation ViewController
 
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
-    FMProduct * fmP = [[FMProduct alloc] init];
-    NSMutableArray * arr = [fmP quaryAllData];
-    for (JournalInfo * jour in arr) {
-        NSLog(@"%@",jour);
-    }
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,10 +31,7 @@
     calendarView.collectionView.delegate = self;
     calendarView.date = [NSDate date];
     self.calendarView = calendarView;
-    
-    FMProduct * fmP = [[FMProduct alloc] init];
-    [fmP clearAll];
-    
+
     
     
 }
