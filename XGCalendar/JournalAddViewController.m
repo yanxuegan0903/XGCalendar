@@ -27,29 +27,44 @@
     JournalAddView * addView = [[JournalAddView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64)];
     [self.view addSubview:addView];
     self.addView = addView;
-
+    
     
     UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(clickSave)];
     self.navigationItem.rightBarButtonItem = myButton;
+    
+    if (self.journalInfo) {
+        [addView.title setText:self.journalInfo.title];
+        [addView.text setText:self.journalInfo.content];
+    }
+    
     
 }
 
 
 - (void)clickSave{
-    
-    JournalInfo * journal = [JournalInfo new];
-    journal.dateStamp = [[NSDate date] timeIntervalSince1970];
-    journal.title = self.addView.title.text;
-    journal.content = self.addView.text.text;
+
     
     FMProduct * fmp = [[FMProduct alloc] init];
-    [fmp insertIntoTableWithDateStamp:[[NSDate date] timeIntervalSince1970] title:self.addView.title.text content:self.addView.text.text];
+    
+    if (self.journalInfo) {
+        self.journalInfo.title = self.addView.title.text;
+        self.journalInfo.content = self.addView.text.text;
+        [fmp updateWith:self.journalInfo];
+    }else{
+        
+        [fmp insertIntoTableWithDateStamp:[[NSDate date] timeIntervalSince1970] title:self.addView.title.text content:self.addView.text.text];
+    }
+    
     
     [self.navigationController popViewControllerAnimated:YES];
     
     
 }
 
+
+- (void)dealloc{
+    NSLog(@"------------>>>>>> dealloc %@",NSStringFromClass([self class]));
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

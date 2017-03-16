@@ -10,6 +10,8 @@
 #import "JournalAddViewController.h"
 #import "JournalTableViewCell.h"
 #import "FMProduct.h"
+#import "Calendar.h"
+
 
 @interface JournalShowViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -29,7 +31,6 @@
 - (void)quaryData{
     
     FMProduct * fmp = [[FMProduct alloc] init];
-    
     
     self.dataSource = [fmp quaryWith:[self.date timeIntervalSince1970]];
     
@@ -99,6 +100,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    JournalTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    JournalAddViewController * vc = [JournalAddViewController new];
+    vc.journalInfo = cell.journalInfo;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
 }
 
 
@@ -106,14 +115,40 @@
 
 #pragma mark - 点击添加
 - (void)addJournal{
-    NSLog(@"点击添加");
     
-    JournalAddViewController * vc = [JournalAddViewController new];
-    vc.date = self.date;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([[Calendar dateWithDate:self.date DayAfter:1] timeIntervalSinceDate:[NSDate date]] < 0) {
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"不能在过去时间添加" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+        
+        return ;
+    }
+    
+    
+    if ([self.date timeIntervalSinceDate:[NSDate date]] > 0) {
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您现在添加的日志将保存在当前日期中" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            JournalAddViewController * vc = [JournalAddViewController new];
+            vc.date = self.date;
+            [self.navigationController pushViewController:vc animated:YES];
+        }]];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }else{
+        JournalAddViewController * vc = [JournalAddViewController new];
+        vc.date = self.date;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
     
 }
 
+- (void)dealloc{
+    NSLog(@"------------>>>>>> dealloc %@",NSStringFromClass([self class]));
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

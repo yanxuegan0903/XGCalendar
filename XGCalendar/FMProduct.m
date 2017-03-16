@@ -56,11 +56,8 @@
 - (void)insertIntoTableWithDateStamp:(NSInteger)dateStamp title:(NSString *)title content:(NSString *)content {
     FMManager *dbM = [FMManager shareInsyance];
     if ([dbM.db open]) {
-        if ([dbM.db executeUpdate:@"insert into journal (datestamp,title,content) values (?,?,?)",@(dateStamp),[title dataUsingEncoding:NSUTF8StringEncoding],[content dataUsingEncoding:NSUTF8StringEncoding]]) {
-            NSLog(@"--------->>>> 插入成功");
-        }else{
-            NSLog(@"--------->>>> 插入失败");
-        }
+        [dbM.db executeUpdate:@"insert into journal (datestamp,title,content) values (?,?,?)",@(dateStamp),[title dataUsingEncoding:NSUTF8StringEncoding],[content dataUsingEncoding:NSUTF8StringEncoding]];
+
     }
     [dbM.db close];
 }
@@ -118,19 +115,6 @@
     return resultArray;
 }
 
-////  删除一条数据
-//- (void)deleteWith:(JournalInfo *)journal{
-//    [self open];
-//    
-//    NSString * sql = [NSString stringWithFormat:@"DELETE FROM Journal WHERE id = %ld",(long)journal.ID];
-//    NSLog(@"删除一条数据");
-//    if ([self.db executeUpdate:sql withArgumentsInArray:nil]) {
-//        NSLog(@"删除一条数据成功");
-//    }else{
-//        NSLog(@"删除一条数据失败");
-//    }
-//}
-
 
 - (void)deleteWith:(JournalInfo*)journal{
     FMManager *dbM = [FMManager shareInsyance];
@@ -139,5 +123,16 @@
     }
     [dbM.db close];
 }
+
+
+- (void)updateWith:(JournalInfo*)journal{
+    FMManager *dbM = [FMManager shareInsyance];
+    if ([dbM.db open]) {
+        [dbM.db executeUpdate:@"update Journal set title = ? , content = ? WHERE id = ?",[journal.title dataUsingEncoding:NSUTF8StringEncoding],[journal.content dataUsingEncoding:NSUTF8StringEncoding],@(journal.ID)];
+    }
+    [dbM.db close];
+
+}
+
 
 @end

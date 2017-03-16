@@ -28,6 +28,8 @@
 //  删除一条数据
 - (void)deleteWith:(JournalInfo*)journal;
 
+//  更新一条数据
+- (void)updateWith:(JournalInfo*)journal;
 
 
 @end

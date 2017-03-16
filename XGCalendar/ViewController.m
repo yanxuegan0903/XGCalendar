@@ -10,6 +10,8 @@
 #import "CalendarView.h"
 #import "CalendarCell.h"
 #import "JournalShowViewController.h"
+#import "FMProduct.h"
+
 
 @interface ViewController ()<UICollectionViewDelegate>
 
@@ -32,7 +34,8 @@
     calendarView.date = [NSDate date];
     self.calendarView = calendarView;
 
-    
+    UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithTitle:@"全部数据" style:UIBarButtonItemStylePlain target:self action:@selector(allData)];
+    self.navigationItem.rightBarButtonItem = myButton;
     
 }
 
@@ -48,6 +51,20 @@
     
 }
 
+
+- (void)allData{
+    FMProduct * fmp = [[FMProduct alloc] init];
+    
+    NSMutableArray * arr = [fmp quaryAllData];
+    
+    for (JournalInfo * journal  in arr) {
+        NSLog(@"%@",journal);
+    }
+}
+
+- (void)dealloc{
+    NSLog(@"------------>>>>>> dealloc %@",NSStringFromClass([self class]));
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
