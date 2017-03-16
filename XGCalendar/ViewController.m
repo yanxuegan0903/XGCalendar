@@ -27,7 +27,7 @@
     [fmP createtable];
 //    [fmP insertIntoTable:123456 title:@"wo3" content:@"sfsdf"];
     NSString * str = @"woshishui我是谁123";
-    [fmP insertIntoTable:[str dataUsingEncoding:NSUTF8StringEncoding]];
+    [fmP insertIntoTableWithDateStamp:[[NSDate date] timeIntervalSince1970] title:str content:str];
 
     NSLog(@"123");
 }

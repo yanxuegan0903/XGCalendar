@@ -10,7 +10,7 @@
 
 @interface FMProduct : NSObject
 - (void)createtable;
-//- (void)insertIntoTable:(NSInteger)dateStamp title:(NSString *)title content:(NSString *)content;
-- (void)insertIntoTable:(NSData *)data;
+
+- (void)insertIntoTableWithDateStamp:(NSInteger)dateStamp title:(NSString *)title content:(NSString *)content ;
 
 @end
