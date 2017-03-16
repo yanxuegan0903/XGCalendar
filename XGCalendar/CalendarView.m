@@ -21,10 +21,9 @@ typedef enum : NSUInteger {
 
 
 
-@interface CalendarView ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface CalendarView ()<UICollectionViewDataSource>
 
 
-@property (nonatomic, strong) UICollectionView *collectionView;
 
 @property(nonatomic,assign)NSInteger firstWeekday;
 
@@ -112,7 +111,6 @@ typedef enum : NSUInteger {
         [self addSubview:collectionView];
         [collectionView registerClass:[CalendarCell class] forCellWithReuseIdentifier:NSStringFromClass([CalendarCell class])];
         collectionView.backgroundColor = [UIColor greenColor];
-        collectionView.delegate = self;
         collectionView.dataSource = self;
         self.collectionView = collectionView;
         
@@ -195,12 +193,6 @@ typedef enum : NSUInteger {
     
 }
 
-
-#pragma mark - CollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    CalendarCell * cell = (CalendarCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    self.date = cell.date;
-}
 
 
 #pragma mark - 左右箭头点击时间

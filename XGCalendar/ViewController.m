@@ -8,9 +8,12 @@
 
 #import "ViewController.h"
 #import "CalendarView.h"
+#import "CalendarCell.h"
 
+@interface ViewController ()<UICollectionViewDelegate>
 
-@interface ViewController ()
+@property (nonatomic, strong) CalendarView *calendarView;
+
 
 @end
 
@@ -22,14 +25,24 @@
     
     CalendarView * calendarView = [[CalendarView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.width+(self.view.frame.size.width/7.0))];
     [self.view addSubview:calendarView];
-    
+    calendarView.collectionView.delegate = self;
     calendarView.date = [NSDate date];
+    self.calendarView = calendarView;
     
     
     
     
     
-    
+}
+
+#pragma mark - CollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    CalendarCell * cell = (CalendarCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    if (cell.date) {
+        NSLog(@"=======");
+        self.calendarView.date = cell.date;
+    }
+
 }
 
 

@@ -13,5 +13,7 @@
 
 @property (nonatomic, strong) NSDate *date;
 
+@property (nonatomic, strong) UICollectionView *collectionView;
+
 
 @end
